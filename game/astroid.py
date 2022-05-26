@@ -8,20 +8,24 @@ from game.constants import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
     WORKING_DIRECTORY,
+    
 )
 from game.actor import Actor
 from game.physics import Physics
 from game.data import Data
+from game.inputs import Inputs
 import arcade
 
 class Astroid(arcade.Sprite):
-    def __init__(self, x, y, deltaX, deltaY): 
+    def __init__(self, x, y, deltaX, deltaY, inputs): 
         super().__init__(WORKING_DIRECTORY+"\game\images\meteor1.png", SHIP_SCALE)
         self.center_x = SCREEN_WIDTH / 3
         self.center_y = SCREEN_HEIGHT / 3
         self.physics = Physics(x, y, deltaX, deltaY, 0)
+        self.inputs = inputs
         self.getLetter()
         self.draw()
+        
     
     # \\\ GET POS ///
     # Returns the current (x, y) coordinates of the ship
@@ -35,19 +39,20 @@ class Astroid(arcade.Sprite):
         print(letter_asteroid)
 
     def draw(self):
-        arcade.draw_text(
-            "fish sticks",
-            SCREEN_WIDTH / 4,
-            SCREEN_HEIGHT / 4,
-            arcade.csscolor.RED,
-            25
-            )
+        
         arcade.draw_circle_filled(
             self.physics.get_pos()[0],
             self.physics.get_pos()[1],
             10,
             arcade.color.RED
             )
+        arcade.draw_text(
+            self.inputs.get_active_word(),
+            self.physics.get_pos()[0],
+            self.physics.get_pos()[1],
+            arcade.csscolor.WHITE,
+            25
+        )
     
     def update(self):
         self.center_x = self.physics.get_pos()[0]

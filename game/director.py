@@ -112,7 +112,7 @@ class Director(arcade.View):
         deltaY = speed * math.sin(theta - (math.pi/2))
 
         # Return a new asteroid object
-        return Astroid(x, y, deltaX, deltaY)
+        return Astroid(x, y, deltaX, deltaY, self.inputs)
 
     # \\\ SPAWN LASER ///
     # Spawns a laser from the direction the ship is currently pointing

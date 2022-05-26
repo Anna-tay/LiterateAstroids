@@ -28,6 +28,10 @@ class Inputs(arcade.Sprite):
     def get_word(self): 
         self.active_word = self.data.random_word()
         self.active_word = self.active_word[:-1]    # It currently reads an extra space. This deletes that space
+        
+    
+    def get_active_word(self):
+        return self.active_word
 
     # \\\ DRAW ///
     # Displays the current status of the input string on the screen
@@ -47,7 +51,9 @@ class Inputs(arcade.Sprite):
             CENTER_Y - 335,
             arcade.color.RED,
             25)
+
     
+
     # \\\ Update ///
     # Watches for signals related to "held down" keys and performs related code
     # on the clock update
